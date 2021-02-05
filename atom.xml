@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heshiyingx.github.io</id>
     <title>Gridea</title>
-    <updated>2021-02-05T03:53:41.688Z</updated>
+    <updated>2021-02-05T04:01:04.668Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heshiyingx.github.io"/>
     <link rel="self" href="https://heshiyingx.github.io/atom.xml"/>
@@ -16,7 +16,8 @@
         <link href="https://heshiyingx.github.io/post/huan-jing-an-zhuang/">
         </link>
         <updated>2020-12-10T15:40:03.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1虚拟环境virtualenv安装">1.🏡虚拟环境virtualenv安装</h1>
+        <content type="html"><![CDATA[<p>基础阶段的环境搭建</p>
+<h1 id="1虚拟环境virtualenv安装">1.🏡虚拟环境virtualenv安装</h1>
 <p>python 的虚拟环境可以为一个 python 项目提供独立的解释环境、依赖包等资源，既能够很好的隔离不同项目使用不同 python 版本带来的冲突，而且还能方便项目的发布。</p>
 <p>virtualenv可用于创建独立的 Python 环境，它会创建一个包含项目所必须要的执行文件。</p>
 <h2 id="11-安装virtualenv">1.1 安装virtualenv</h2>
@@ -98,7 +99,7 @@ mkvirtualenv [虚拟环境名称] -p /usr/local/bin/python3
 <pre><code class="language-bash">matplotlib==2.2.2
 numpy==1.14.2
 pandas==0.20.3
-tables==3.4.2
+tables==3.6.1
 jupyter==1.0.0
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://heshiyingx.github.io/post-images/1612453352328.png" alt="" loading="lazy"></figure>
