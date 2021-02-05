@@ -1,101 +1,108 @@
 <html>
-  <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
 <title>02.matplotlib的使用 | 烂笔头</title>
-<link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1612532144826">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+
+<link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1612532836117">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://heshiyingx.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="02.matplotlib的使用 | 烂笔头 - Atom Feed" href="https://heshiyingx.github.io/atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
 
 
 
-    <meta name="description" content="matplotlib.pyplot是使matplotlib像MATLAB一样工作的函数的集合。每个pyplot功能都会对图形进行一些更改：例如，创建图形，在图形中创建绘图区域，在绘图区域中绘制一些线条，用标签装饰绘图等。
-在matplotl..." />
-    <meta name="keywords" content="ai" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  </head>
-  <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://heshiyingx.github.io">
-  <img class="avatar" src="https://heshiyingx.github.io/images/avatar.png?v=1612532144826" alt="">
-  </a>
-  <h1 class="site-title">
-    烂笔头
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              02.matplotlib的使用
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-12-10
-              </span>
-              <span>
-                10 min read
-              </span>
-              
-                <a href="https://heshiyingx.github.io/tag/ai/" class="post-tag">
-                  # ai
-                </a>
-              
-            </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            烂笔头
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
             
-              <img class="post-feature-image" src="https://heshiyingx.github.io/post-images/02jupyter-notebook-de-shi-yong.png" alt="">
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>matplotlib.pyplot是使matplotlib像MATLAB一样工作的函数的集合。每个pyplot功能都会对图形进行一些更改：例如，创建图形，在图形中创建绘图区域，在绘图区域中绘制一些线条，用标签装饰绘图等。</p>
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1612532836117" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    02.matplotlib的使用
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-10 ·
+                    </time>
+                    
+                        <a href="https://heshiyingx.github.io/tag/ai/" class="post-tags">
+                            # ai
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>matplotlib.pyplot是使matplotlib像MATLAB一样工作的函数的集合。每个pyplot功能都会对图形进行一些更改：例如，创建图形，在图形中创建绘图区域，在绘图区域中绘制一些线条，用标签装饰绘图等。</p>
 <p>在matplotlib.pyplot各种状态下，函数调用之间会保留在一起，以便跟踪当前图形和绘图区域之类的内容，并且绘图功能指向当前轴（请注意，此处和文档中大多数地方的“轴”是指到轴 的图形的部分 和不超过一个轴线的严格的数学术语）。</p>
 <!-- more -->
 <h1 id="1中文显示问题解决">1.中文显示问题解决</h1>
@@ -448,96 +455,53 @@ axes[1].legend(loc=0)
 plt.show()
 </code></pre>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#1%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">1.中文显示问题解决</a></li>
-<li><a href="#2%E6%8A%98%E7%BA%BF%E5%9B%BE">2.折线图</a>
-<ul>
-<li><a href="#21-%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%BB%98%E5%9B%BE%E6%A0%B7%E5%BC%8F">2.1 格式化绘图样式</a></li>
-<li><a href="#22-%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89xy%E7%9A%84%E5%88%BB%E5%BA%A6">2.2 添加自定义x,y的刻度</a></li>
-<li><a href="#23-%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%A0%BC%E6%98%BE%E7%A4%BA">2.3 添加网格显示</a></li>
-<li><a href="#24-%E6%B7%BB%E5%8A%A0%E6%8F%8F%E8%BF%B0%E4%BF%A1%E6%81%AF">2.4 添加描述信息</a></li>
-<li><a href="#25-%E5%9B%BE%E5%83%8F%E4%BF%9D%E5%AD%98">2.5 图像保存</a></li>
-</ul>
-</li>
-<li><a href="#3-%E5%9C%A8%E4%B8%80%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%AD%E7%BB%98%E5%88%B6%E5%A4%9A%E4%B8%AA%E5%9B%BE%E5%83%8F">3 在一个坐标系中绘制多个图像</a>
-<ul>
-<li><a href="#31-%E5%A4%9A%E6%AC%A1plot">3.1 多次plot</a></li>
-<li><a href="#32-%E8%AE%BE%E7%BD%AE%E5%9B%BE%E5%BD%A2%E9%A3%8E%E6%A0%BC">3.2 设置图形风格</a></li>
-<li><a href="#33-%E6%98%BE%E7%A4%BA%E5%9B%BE%E4%BE%8B">3.3 显示图例</a></li>
-</ul>
-</li>
-<li><a href="#4-%E5%A4%9A%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E6%98%BE%E7%A4%BA-pltsubplots%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%BB%E5%9B%BE%E6%96%B9%E6%B3%95">4 多个坐标系显示— plt.subplots(面向对象的画图方法)</a></li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+                </div>
+            </article>
         </div>
 
         
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://heshiyingx.github.io/post/hello-gridea/">
-              <h3 class="post-title">
-                Hello Gridea
-              </h3>
-            </a>
-          </div>
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://heshiyingx.github.io/post/hello-gridea/" class="post-title gt-a-link">
+                    Hello Gridea
+                </a>
+            </div>
         
 
         
 
-        <div class="site-footer">
-  Powered by <a href="https://heshiyingx.github.io/" target="_blank">John He</a>
-  <a class="rss" href="https://heshiyingx.github.io/atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
-</div>
+        
 
-      </div>
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://heshiyingx.github.io/" target="_blank">John He</a>
     </div>
 
-    <script>
-      hljs.initHighlightingOnLoad()
+</div>
 
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
 
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
-
-      window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
-
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(decodeURI(link.hash).substring(1));
-          let nextSection = null
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");    
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
-
-    </script>
-  </body>
+    </div>
+</div>
+</body>
 </html>
