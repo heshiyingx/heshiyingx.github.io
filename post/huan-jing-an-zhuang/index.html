@@ -1,0 +1,267 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1.环境安装 | Gridea</title>
+<link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1612497217522">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://heshiyingx.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="1.环境安装 | Gridea - Atom Feed" href="https://heshiyingx.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="1.🏡虚拟环境virtualenv安装
+python 的虚拟环境可以为一个 python 项目提供独立的解释环境、依赖包等资源，既能够很好的隔离不同项目使用不同 python 版本带来的冲突，而且还能方便项目的发布。
+virtualenv..." />
+    <meta name="keywords" content="ai" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://heshiyingx.github.io">
+  <img class="avatar" src="https://heshiyingx.github.io/images/avatar.png?v=1612497217522" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              1.环境安装
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-12-10
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://heshiyingx.github.io/tag/ai/" class="post-tag">
+                  # ai
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="1虚拟环境virtualenv安装">1.🏡虚拟环境virtualenv安装</h1>
+<p>python 的虚拟环境可以为一个 python 项目提供独立的解释环境、依赖包等资源，既能够很好的隔离不同项目使用不同 python 版本带来的冲突，而且还能方便项目的发布。</p>
+<p>virtualenv可用于创建独立的 Python 环境，它会创建一个包含项目所必须要的执行文件。</p>
+<h2 id="11-安装virtualenv">1.1 安装virtualenv</h2>
+<pre><code class="language-python">sudo pip3 install virtualenv
+# 配置 pip 安装第三方库的镜像源地址
+sudo pip install -i https://pypi.douban.com/simple virtualenv
+# 查看版本
+virtualenv --version
+</code></pre>
+<h2 id="12-virtualenv使用方法">1.2 virtualenv使用方法</h2>
+<p>如下命令表示在当前目录下创建一个名叫 env 的目录（虚拟环境），该目录下包含了独立的 Python 运行程序,以及 pip副本用于安装其他的 packge</p>
+<pre><code class="language-python"># 当前目录创建虚拟环境
+virtualenv [虚拟环境名称]
+# 创建 env 的时候可以选择 Python 解释器，例如：
+virtualenv -p /usr/local/bin/python3 [虚拟环境名称]
+</code></pre>
+<p>默认情况下，虚拟环境会依赖系统环境中的 site packages，就是说系统中已经安装好的第三方 package 也会安装在虚拟环境中，如果不想依赖这些 package，那么可以加上参数 --no-site-packages 建立虚拟环境</p>
+<pre><code class="language-python"># 创建的虚拟环境不包含系统环境中的site packages
+virtualenv --no-site-packages [虚拟环境名称]
+</code></pre>
+<p><strong>启动虚拟环境</strong></p>
+<pre><code class="language-python">cd  [虚拟环境名称]
+source ./bin/activate
+</code></pre>
+<p><strong>退出虚拟环境</strong></p>
+<pre><code class="language-python">deactivate
+</code></pre>
+<p><strong>在虚拟环境安装 Python packages</strong><br>
+Virtualenv 附带有 pip 安装工具，因此需要安装的 packages 可以直接运行：</p>
+<pre><code class="language-python">pip install [套件名称]
+</code></pre>
+<h2 id="13-virtualenvwrapper">1.3 Virtualenvwrapper</h2>
+<p>Virtualenvwrapper 是一个虚拟环境管理工具，它能够管理创建的虚拟环境的位置，并能够方便地查看虚拟环境的名称以及切换到指定的虚拟环境。</p>
+<p><strong>安装（确保virtualenv已经安装）</strong><br>
+安装需要在非虚拟环境下进行</p>
+<pre><code class="language-python">sudo pip install virtualenvwrapper
+# 或者使用豆瓣源
+sudo pip install -i https://pypi.douban.com/simple virtualenvwrapper
+</code></pre>
+<p><strong>查找virtualenvwrapper.sh</strong></p>
+<pre><code class="language-python">which virtualenvwrapper.sh
+</code></pre>
+<blockquote>
+<p>我的机器上的位置是：/Library/Frameworks/Python.framework/Versions/3.4/bin/virtualenvwrapper.sh</p>
+</blockquote>
+<p><strong>修改.bash_profile</strong><br>
+打开/Users/用户名/.bash_profile ，在最后加入：</p>
+<pre><code class="language-bash">export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_SCRIPT=/Library/Frameworks/Python.framework/Versions/3.4/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/3.4/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/Library/Frameworks/Python.framework/Versions/3.4/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+source /Library/Frameworks/Python.framework/Versions/3.4/bin/virtualenvwrapper.sh
+</code></pre>
+<h2 id="14-virtualenvwrapper的使用">1.4 Virtualenvwrapper的使用</h2>
+<p><strong>创建虚拟机</strong></p>
+<pre><code class="language-python">mkvirtualenv [虚拟环境名称]
+# 当然也可以指定虚拟机的 python 版本
+mkvirtualenv [虚拟环境名称] -p /usr/local/bin/python3 
+</code></pre>
+<p><strong>列出虚拟环境列表</strong></p>
+<pre><code class="language-bash">workon 或者 lsvirtualenv
+</code></pre>
+<p><strong>启动/切换虚拟环境</strong></p>
+<pre><code class="language-bash">workon [虚拟环境名称]
+</code></pre>
+<p><strong>删除虚拟环境</strong></p>
+<pre><code class="language-bash">rmvirtualenv [虚拟环境名称]
+</code></pre>
+<p><strong>离开虚拟环境，和 virutalenv 一样的命令</strong></p>
+<pre><code class="language-bash">deactivate
+</code></pre>
+<h1 id="2机器学习基础阶段的环境搭建">2.机器学习基础阶段的环境搭建</h1>
+<p>整个机器学习基础阶段会用到Matplotlib、Numpy、Pandas等库，为了统一版本号在环境中使用，将所有的库及其版本放到了文件requirements.txt当中，然后统一安装</p>
+<p><strong>新建一个用于人工智能环境的虚拟环境</strong></p>
+<pre><code class="language-bash">mkvirtualenv ai_base
+</code></pre>
+<p>requirements.txt 的内容</p>
+<pre><code class="language-bash">matplotlib==2.2.2
+numpy==1.14.2
+pandas==0.20.3
+tables==3.4.2
+jupyter==1.0.0
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://heshiyingx.github.io/post-images/1612453352328.png" alt="" loading="lazy"></figure>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#1%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83virtualenv%E5%AE%89%E8%A3%85">1.🏡虚拟环境virtualenv安装</a>
+<ul>
+<li><a href="#11-%E5%AE%89%E8%A3%85virtualenv">1.1 安装virtualenv</a></li>
+<li><a href="#12-virtualenv%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">1.2 virtualenv使用方法</a></li>
+<li><a href="#13-virtualenvwrapper">1.3 Virtualenvwrapper</a></li>
+<li><a href="#14-virtualenvwrapper%E7%9A%84%E4%BD%BF%E7%94%A8">1.4 Virtualenvwrapper的使用</a></li>
+</ul>
+</li>
+<li><a href="#2%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E7%9A%84%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">2.机器学习基础阶段的环境搭建</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://heshiyingx.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://heshiyingx.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
