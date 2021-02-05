@@ -1,0 +1,373 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>01.supervisor的使用 | 烂笔头</title>
+
+<link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1612539646435">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://heshiyingx.github.io/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            烂笔头
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1612539646435" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    01.supervisor的使用
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2016-02-03 ·
+                    </time>
+                    
+                        <a href="https://heshiyingx.github.io/tag/Xx5pl2blN/" class="post-tags">
+                            # 第三方框架及库
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="1为什么要使用supervisor">1.为什么要使用supervisor</h1>
+<p>在维护Linux服务中，有很多程序是没有启动脚本的，并且还是前台运行进程占用着shell窗口，窗口关闭程序也就随之关闭。比如flask和Django的启动程序。如果需要放在后台运行，并且能方便的重启，关闭，该怎么办呢？</p>
+<p>我们supervisor去管理这些进程。supervisor提供了如下功能。</p>
+<ul>
+<li>将前台进程转换为后台进程。</li>
+<li>能监控进程的运行状态，如进程的异常退出，supervisor则会自动重启进程。</li>
+<li>能对服务方便快捷的进行启动、重启、关闭等便捷操作。</li>
+<li>提供了web ui界面，便于直接使用。</li>
+</ul>
+<h1 id="2supervisor的基础组件">2.Supervisor的基础组件</h1>
+<ul>
+<li>
+<p>supervisord</p>
+<p>supervisor的主进程，负责管理被管理进程的服务。并且监控其他被管理进程的状态，对于crash的进程会自动重启</p>
+</li>
+<li>
+<p>supervisorctl</p>
+<p>是supervisor的命令行管理工具，可以通过supervisorctl查看被管理进程的状态以及启动，重启，关闭等操作。supervisorctl和其他很多命令行工具一样（如redis-cli）既可以连接本地的supervisor也可以连接远程的supervisor。</p>
+</li>
+<li>
+<p>web server</p>
+<p>supervisor提供了一个web服务的页面，可以方便的在页面进行操作。</p>
+</li>
+<li>
+<p>xml-rpc interface</p>
+<p>supervisor的通讯协议。</p>
+</li>
+</ul>
+<h1 id="3supervisor的安装">3.supervisor的安装</h1>
+<pre><code class="language-bash">yum install epel-release -y &amp;&amp; # 安装epel源
+yum install supervisor -y # 安装supervisor
+</code></pre>
+<p><strong>启动</strong></p>
+<pre><code class="language-bash">systemctl enable supervisord # 加入开机自动启动
+systemctl start supervisord # 启动supervisor
+</code></pre>
+<h1 id="4supervisor的配置解读">4.supervisor的配置解读</h1>
+<p>配置文件路径：/etc/supervisord.conf</p>
+<ul>
+<li>
+<p>unix_http_server (supervisor的unix管理服务配置)</p>
+<pre><code class="language-ini">[unix_http_server]
+file=/var/run/supervisor/supervisor.sock   ; (the path to the socket file)
+;chmod=0700                 ; sockef file mode (default 0700)
+;chown=nobody:nogroup       ; socket file uid:gid owner
+;username=user              ; (default is no username (open server))
+;password=123               ; (default is no password (open server))
+</code></pre>
+</li>
+<li>
+<p>inet_http_server(supervisor的web服务配置)</p>
+<pre><code class="language-ini">;[inet_http_server]         ; inet (TCP) server disabled by default
+;port=127.0.0.1:9001        ; (ip_address:port specifier, *:port for all iface)
+;username=user              ; (default is no username (open server))
+;password=123               ; (default is no password (open server))
+</code></pre>
+</li>
+<li>
+<p>supervisord （supervisor主进程的配置）</p>
+<pre><code class="language-ini">[supervisord]
+logfile=/var/log/supervisor/supervisord.log  ; (main log file;default $CWD/supervisord.log)
+logfile_maxbytes=50MB       ; (max main logfile bytes b4 rotation;default 50MB)
+logfile_backups=10          ; (num of main logfile rotation backups;default 10)
+loglevel=info               ; (log level;default info; others: debug,warn,trace)
+pidfile=/var/run/supervisord.pid ; (supervisord pidfile;default supervisord.pid)
+nodaemon=false              ; (start in foreground if true;default false)
+minfds=1024                 ; (min. avail startup file descriptors;default 1024)
+minprocs=200                ; (min. avail process descriptors;default 200)
+;umask=022                  ; (process file creation umask;default 022)
+;user=chrism                 ; (default is current user, required if root)
+;identifier=supervisor       ; (supervisord identifier, default is 'supervisor')
+;directory=/tmp              ; (default is not to cd during start)
+;nocleanup=true              ; (don't clean up tempfiles at start;default false)
+;childlogdir=/tmp            ; ('AUTO' child log dir, default $TEMP)
+;environment=KEY=value       ; (key value pairs to add to environment)
+;strip_ansi=false            ; (strip ansi escape codes in logs; def. false)
+</code></pre>
+</li>
+<li>
+<p>supervisorctl(supervisor命令行工具的配置)</p>
+<pre><code class="language-ini">[supervisorctl]
+serverurl=unix:///var/run/supervisor/supervisor.sock ; use a unix:// URL  for a unix socket
+;serverurl=http://127.0.0.1:9001 ; use an http:// url to specify an inet socket
+;username=chris              ; should be same as http_username if set
+;password=123                ; should be same as http_password if set
+;prompt=mysupervisor         ; cmd line prompt (default &quot;supervisor&quot;)
+;history_file=~/.sc_history  ; use readline history if available
+</code></pre>
+</li>
+<li>
+<p>program:theprogramname（定义要管理的进程的配置）</p>
+<pre><code class="language-ini">;[program:theprogramname]
+;command=/bin/cat              ; the program (relative uses PATH, can take args)
+;process_name=%(program_name)s ; process_name expr (default %(program_name)s)
+;numprocs=1                    ; number of processes copies to start (def 1)
+;directory=/tmp                ; directory to cwd to before exec (def no cwd)
+;umask=022                     ; umask for process (default None)
+;priority=999                  ; the relative start priority (default 999)优先级低则先启动，后关闭
+;autostart=true                ; start at supervisord start (default: true)启动supervisord的服务后自动拉起该进程
+;autorestart=true              ; retstart at unexpected quit (default: true)异常自动重启
+;startsecs=10                  ; number of secs prog must stay running (def. 1)启动后多少秒存活才被认为running状态
+;startretries=3                ; max # of serial start failures (default 3)
+;exitcodes=0,2                 ; 'expected' exit codes for process (default 0,2)
+;stopsignal=QUIT               ; signal used to kill process (default TERM)
+;stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)
+;user=chrism                   ; setuid to this UNIX account to run the program
+;redirect_stderr=true          ; redirect proc stderr to stdout (default false)
+;stdout_logfile=/a/path        ; stdout log path, NONE for none; default AUTO
+;stdout_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+;stdout_logfile_backups=10     ; # of stdout logfile backups (default 10)
+;stdout_capture_maxbytes=1MB   ; number of bytes in 'capturemode' (default 0)
+;stdout_events_enabled=false   ; emit events on stdout writes (default false)
+;stderr_logfile=/a/path        ; stderr log path, NONE for none; default AUTO
+;stderr_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+;stderr_logfile_backups=10     ; # of stderr logfile backups (default 10)
+;stderr_capture_maxbytes=1MB   ; number of bytes in 'capturemode' (default 0)
+;stderr_events_enabled=false   ; emit events on stderr writes (default false)
+;environment=A=1,B=2           ; process environment additions (def no adds)
+;serverurl=AUTO                ; override serverurl computation (childutils)
+</code></pre>
+</li>
+<li>
+<p>group:thegroupname(将被管理的进程分组)</p>
+<pre><code class="language-ini">;[group:thegroupname]
+;programs=progname1,progname2  ; each refers to 'x' in [program:x] definitions
+;priority=999                  ; the relative start priority (default 999)
+
+; The [include] section can just contain the &quot;files&quot; setting.  This
+; setting can list multiple files (separated by whitespace or
+; newlines).  It can also contain wildcards.  The filenames are
+; interpreted as relative to this file.  Included files *cannot*
+; include files themselves.
+</code></pre>
+</li>
+<li>
+<p>include(被管理进程配置文件的目录)</p>
+<pre><code class="language-ini">[include]
+files = supervisord.d/*.ini
+</code></pre>
+</li>
+</ul>
+<h1 id="5supervisor示例">5.supervisor示例</h1>
+<h2 id="51supervisor管理python项目">5.1.supervisor管理Python项目</h2>
+<ul>
+<li>1.创建Django工程</li>
+</ul>
+<pre><code class="language-bash">yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel gcc gcc-c++ openssl-devel zlib zlib-devel python3 python3-devel -y #安装组件依赖包
+
+pip3 install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip # 升级pip
+pip3 install -i https://mirrors.aliyun.com/pypi/simple/ django==2.1.8 # 安装Django
+django-admin startproject demosite #新建Django工程
+cd demosite
+python3 manage.py runserver 0.0.0.0:8002
+</code></pre>
+<ul>
+<li>2.创建supervisor的管理进程配置文件</li>
+</ul>
+<pre><code class="language-ini"># vim /etc/supervisord.d/demosite.ini
+[program:demosite]
+command=/bin/bash -c &quot;python3  manage.py runserver 0.0.0.0:8002&quot;         ; the program (relative uses PATH, can take args)
+;;process_name=%(program_name)s ; process_name expr (default %(program_name)s)
+;;numprocs=1                    ; number of processes copies to start (def 1)
+directory=/root/demosite                ; directory to cwd to before exec (def no cwd)
+;;umask=022                     ; umask for process (default None)
+;;priority=999                  ; the relative start priority (default 999)优先级低则先启动，后关闭
+autostart=true                ; start at supervisord start (default: true)启动supervisord的服务后自动拉起该进程
+autorestart=true              ; retstart at unexpected quit (default: true)异常自动重启
+startsecs=10                  ; number of secs prog must stay running (d
+;;stopsignal=QUIT               ; signal used to kill process (default TERM)
+;;stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)
+user=root                   ; setuid to this UNIX account to run the program
+;;redirect_stderr=true          ; redirect proc stderr to stdout (default false)
+stdout_logfile=/root/demosite/logs/std_log.log        ; stdout log path, NONE for none; default AUTO
+;;stdout_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+;;stdout_logfile_backups=10     ; # of stdout logfile backups (default 10)
+;;stdout_capture_maxbytes=1MB   ; number of bytes in 'capturemode' (default 0)
+;;stdout_events_enabled=false   ; emit events on stdout writes (default false)
+stderr_logfile=/root/demosite/logs/err_log.log        ; stderr log path, NONE for none; default AUTO
+stopasgroup=true ;如果supervisor停止，则该进程也stop，避免成为孤儿进程
+killasgroup=true
+;;stderr_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+;;stderr_logfile_backups=10     ; # of stderr logfile backups (default 10)
+;;stderr_capture_maxbytes=1MB   ; number of bytes in 'capturemode' (default 0)
+;;stderr_events_enabled=false   ; emit events on stderr writes (default false)
+</code></pre>
+<h1 id="6supervisorctl常用命令">6.supervisorctl常用命令</h1>
+<pre><code class="language-bash">supervisorctl status        //查看所有进程的状态
+supervisorctl stop es       //停止es
+supervisorctl start es      //启动es
+supervisorctl restart       //重启es
+supervisorctl update        //配置文件修改后使用该命令加载新的配置
+supervisorctl reload        //重新启动配置中的所有程序
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+
+        
+            <span id="/post/01supervisor-de-shi-yong/" class="leancloud_visitors" data-flag-title="01.supervisor的使用">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '',
+		appKey: '',
+		avatar: '',
+		pageSize: 5,
+		recordIp: true,
+		placeholder: 'Just Go Go',
+		visitor: true,
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://heshiyingx.github.io/" target="_blank">John He</a>
+    </div>
+
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
