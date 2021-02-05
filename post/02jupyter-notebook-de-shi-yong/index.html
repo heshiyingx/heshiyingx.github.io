@@ -6,10 +6,10 @@
 
 <title>02.matplotlib的使用 | 烂笔头</title>
 
-<link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1612536786561">
+<link rel="shortcut icon" href="https://heshiying.github.io/favicon.ico?v=1612536944054">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://heshiyingx.github.io/styles/main.css">
+<link rel="stylesheet" href="https://heshiying.github.io/styles/main.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1612536786561" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1612536944054" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -96,7 +96,7 @@
                         · 2020-12-10 ·
                     </time>
                     
-                        <a href="https://heshiyingx.github.io/tag/ai/" class="post-tags">
+                        <a href="https://heshiying.github.io/tag/ai/" class="post-tags">
                             # ai
                         </a>
                     
@@ -124,12 +124,12 @@ plt.plot([1, 2, 3, 4])
 plt.ylabel('y轴名字')
 plt.show()
 </code></pre>
-<p><img src="https://heshiyingx.github.io/post-images/1612511389835.png" alt="" loading="lazy"><br>
+<p><img src="https://heshiying.github.io/post-images/1612511389835.png" alt="" loading="lazy"><br>
 为什么x轴的范围是0-3，而y轴的范围是1-4。如果您向提供单个列表或数组 plot，则matplotlib假定它是y值的序列，并自动为您生成x值。由于python范围以0开头，因此默认的x向量的长度与y相同，但以0开头。因此x数据为 。[0, 1, 2, 3]</p>
 <p>plot是一种多功能函数，它将接受任意数量的参数。例如，要绘制x与y的关系图，可以编写：</p>
 <pre><code class="language-python">plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://heshiyingx.github.io/post-images/1612525683210.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://heshiying.github.io/post-images/1612525683210.png" alt="" loading="lazy"></figure>
 <h2 id="21-格式化绘图样式">2.1 格式化绘图样式</h2>
 <p>对于每对x，y参数，都有一个可选的第三个参数，它是表示图的颜色和线条类型的格式字符串。格式字符串的字母和符号来自MATLAB，您将颜色字符串与线型字符串连接在一起。默认格式字符串是“ b-”，这是一条蓝色实线。例如，要用红色圆圈绘制以上内容</p>
 <pre><code class="language-python">import matplotlib.pyplot as plt
@@ -141,7 +141,7 @@ plt.ylabel('y轴名字')
 plt.axis([0, 6, 0, 20])
 plt.show()
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://heshiyingx.github.io/post-images/1612526412605.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://heshiying.github.io/post-images/1612526412605.png" alt="" loading="lazy"></figure>
 <h2 id="22-添加自定义xy的刻度">2.2 添加自定义x,y的刻度</h2>
 <ul>
 <li>plt.xticks(x, **kwargs)<br>
@@ -172,12 +172,12 @@ plt.yticks(y_ticks[::5])
 
 plt.show()
 </code></pre>
-<figure data-type="image" tabindex="3"><img src="https://heshiyingx.github.io/post-images/1612526926570.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://heshiying.github.io/post-images/1612526926570.png" alt="" loading="lazy"></figure>
 <h2 id="23-添加网格显示">2.3 添加网格显示</h2>
 <p>为了更加清楚地观察图形对应的值</p>
 <pre><code class="language-python">plt.grid(True, linestyle='--', alpha=0.5)
 </code></pre>
-<figure data-type="image" tabindex="4"><img src="https://heshiyingx.github.io/post-images/1612529668398.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://heshiying.github.io/post-images/1612529668398.png" alt="" loading="lazy"></figure>
 <h2 id="24-添加描述信息">2.4 添加描述信息</h2>
 <p>添加x轴、y轴描述信息及标题</p>
 <blockquote>
@@ -187,7 +187,7 @@ plt.show()
 plt.ylabel(&quot;温度&quot;)
 plt.title(&quot;中午11点0分到12点之间的温度变化图示&quot;, fontsize=20)
 </code></pre>
-<figure data-type="image" tabindex="5"><img src="https://heshiyingx.github.io/post-images/1612529749219.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://heshiying.github.io/post-images/1612529749219.png" alt="" loading="lazy"></figure>
 <h2 id="25-图像保存">2.5 图像保存</h2>
 <pre><code class="language-python"># 保存图片到指定路径
 plt.savefig(&quot;test.png&quot;)
@@ -224,7 +224,7 @@ plt.show()
 <h2 id="31-多次plot">3.1 多次plot</h2>
 <p>需求：再添加一个城市的温度变化</p>
 <p>收集到北京当天温度变化情况，温度在1度到3度。怎么去添加另一个在同一坐标系当中的不同图形，其实很简单只需要再次plot即可，但是需要区分线条，如下显示<br>
-<img src="https://heshiyingx.github.io/post-images/1612530001960.png" alt="" loading="lazy"></p>
+<img src="https://heshiying.github.io/post-images/1612530001960.png" alt="" loading="lazy"></p>
 <pre><code class="language-python"># 增加北京的温度数据
 y_beijing = [random.uniform(1, 3) for i in x]
 
@@ -374,7 +374,7 @@ plt.show()
 </code></pre>
 <h1 id="4-多个坐标系显示-pltsubplots面向对象的画图方法">4 多个坐标系显示— plt.subplots(面向对象的画图方法)</h1>
 <p>如果我们想要将上海和北京的天气图显示在同一个图的不同坐标系当中，效果如下：<br>
-<img src="https://heshiyingx.github.io/post-images/1612530885925.png" alt="" loading="lazy"><br>
+<img src="https://heshiying.github.io/post-images/1612530885925.png" alt="" loading="lazy"><br>
 可以通过subplots函数实现(旧的版本中有subplot，使用起来不方便)，推荐subplots函数<br>
 **matplotlib.pyplot.subplots(nrows=1, ncols=1, <strong>fig_kw) 创建一个带有多个axes(坐标系/绘图区)的图</strong></p>
 <pre><code class="language-python">Parameters:    
@@ -462,7 +462,7 @@ plt.show()
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://heshiyingx.github.io/post/hello-gridea/" class="post-title gt-a-link">
+                <a href="https://heshiying.github.io/post/hello-gridea/" class="post-title gt-a-link">
                     Hello Gridea
                 </a>
             </div>
