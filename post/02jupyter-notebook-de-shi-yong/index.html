@@ -2,17 +2,17 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>02.matplotlib.pyplot使用 | Gridea</title>
-<link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1612529284478">
+<title>02.matplotlib的使用 | Gridea</title>
+<link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1612531015980">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://heshiyingx.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="02.matplotlib.pyplot使用 | Gridea - Atom Feed" href="https://heshiyingx.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="02.matplotlib的使用 | Gridea - Atom Feed" href="https://heshiyingx.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="    matplotlib.pyplot是使matplotlib像MATLAB一样工作的函数的集合。每个pyplot功能都会对图形进行一些更改：例如，创建图形，在图形中创建绘图区域，在绘图区域中绘制一些线条，用标签装饰绘图等。
-    在..." />
+    <meta name="description" content="matplotlib.pyplot是使matplotlib像MATLAB一样工作的函数的集合。每个pyplot功能都会对图形进行一些更改：例如，创建图形，在图形中创建绘图区域，在绘图区域中绘制一些线条，用标签装饰绘图等。
+在matplotl..." />
     <meta name="keywords" content="ai" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -22,7 +22,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://heshiyingx.github.io">
-  <img class="avatar" src="https://heshiyingx.github.io/images/avatar.png?v=1612529284478" alt="">
+  <img class="avatar" src="https://heshiyingx.github.io/images/avatar.png?v=1612531015980" alt="">
   </a>
   <h1 class="site-title">
     Gridea
@@ -75,14 +75,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              02.matplotlib.pyplot使用
+              02.matplotlib的使用
             </h2>
             <div class="post-info">
               <span>
                 2020-12-10
               </span>
               <span>
-                4 min read
+                10 min read
               </span>
               
                 <a href="https://heshiyingx.github.io/tag/ai/" class="post-tag">
@@ -95,9 +95,8 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <pre><code>    matplotlib.pyplot是使matplotlib像MATLAB一样工作的函数的集合。每个pyplot功能都会对图形进行一些更改：例如，创建图形，在图形中创建绘图区域，在绘图区域中绘制一些线条，用标签装饰绘图等。
-    在matplotlib.pyplot各种状态下，函数调用之间会保留在一起，以便跟踪当前图形和绘图区域之类的内容，并且绘图功能指向当前轴（请注意，此处和文档中大多数地方的“轴”是指到轴 的图形的部分 和不超过一个轴线的严格的数学术语）。
-</code></pre>
+                <p>matplotlib.pyplot是使matplotlib像MATLAB一样工作的函数的集合。每个pyplot功能都会对图形进行一些更改：例如，创建图形，在图形中创建绘图区域，在绘图区域中绘制一些线条，用标签装饰绘图等。</p>
+<p>在matplotlib.pyplot各种状态下，函数调用之间会保留在一起，以便跟踪当前图形和绘图区域之类的内容，并且绘图功能指向当前轴（请注意，此处和文档中大多数地方的“轴”是指到轴 的图形的部分 和不超过一个轴线的严格的数学术语）。</p>
 <!-- more -->
 <h1 id="1中文显示问题解决">1.中文显示问题解决</h1>
 <p>在Python脚本中动态设置matplotlibrc,这样也可以避免由于更改配置文件而造成的麻烦，具体代码如下：</p>
@@ -136,7 +135,7 @@ plt.axis([0, 6, 0, 20])
 plt.show()
 </code></pre>
 <figure data-type="image" tabindex="2"><img src="https://heshiyingx.github.io/post-images/1612526412605.png" alt="" loading="lazy"></figure>
-<h2 id="22添加自定义xy的刻度">2.2添加自定义x,y的刻度</h2>
+<h2 id="22-添加自定义xy的刻度">2.2 添加自定义x,y的刻度</h2>
 <ul>
 <li>plt.xticks(x, **kwargs)<br>
 x:要显示的刻度值</li>
@@ -167,14 +166,285 @@ plt.yticks(y_ticks[::5])
 plt.show()
 </code></pre>
 <figure data-type="image" tabindex="3"><img src="https://heshiyingx.github.io/post-images/1612526926570.png" alt="" loading="lazy"></figure>
-<h1 id="1准备数据并画折线图">1.准备数据并画折线图</h1>
+<h2 id="23-添加网格显示">2.3 添加网格显示</h2>
+<p>为了更加清楚地观察图形对应的值</p>
+<pre><code class="language-python">plt.grid(True, linestyle='--', alpha=0.5)
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://heshiyingx.github.io/post-images/1612529668398.png" alt="" loading="lazy"></figure>
+<h2 id="24-添加描述信息">2.4 添加描述信息</h2>
+<p>添加x轴、y轴描述信息及标题</p>
+<blockquote>
+<p>通过fontsize参数可以修改图像中字体的大小</p>
+</blockquote>
+<pre><code class="language-python">plt.xlabel(&quot;时间&quot;)
+plt.ylabel(&quot;温度&quot;)
+plt.title(&quot;中午11点0分到12点之间的温度变化图示&quot;, fontsize=20)
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://heshiyingx.github.io/post-images/1612529749219.png" alt="" loading="lazy"></figure>
+<h2 id="25-图像保存">2.5 图像保存</h2>
+<pre><code class="language-python"># 保存图片到指定路径
+plt.savefig(&quot;test.png&quot;)
+</code></pre>
+<p>注意：plt.show()会释放figure资源，如果在显示图像之后保存图片将只能保存空图片。</p>
+<p><strong>完整代码</strong></p>
 <pre><code class="language-python">import matplotlib.pyplot as plt
 import random
+from pylab import mpl
+
+# 设置显示中文字体
+mpl.rcParams[&quot;font.sans-serif&quot;] = [&quot;SimHei&quot;]
 
 x = range(60)
 y_shanghai = [random.uniform(10,27) for i in x]
 plt.figure(figsize=(20,7),dpi=80)
 plt.plot(x,y_shanghai)
+
+# 构造x轴刻度标签
+x_ticks_label = [&quot;11点{}分&quot;.format(i) for i in x]
+# 构造y轴刻度
+y_ticks = range(40)
+
+# 修改x,y轴坐标的刻度显示
+plt.xticks(x[::5], x_ticks_label[::5])
+plt.yticks(y_ticks[::5])
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.xlabel(&quot;时间&quot;)
+plt.ylabel(&quot;温度&quot;)
+plt.title(&quot;中午11点0分到12点之间的温度变化图示&quot;, fontsize=20)
+plt.show()
+</code></pre>
+<h1 id="3-在一个坐标系中绘制多个图像">3 在一个坐标系中绘制多个图像</h1>
+<h2 id="31-多次plot">3.1 多次plot</h2>
+<p>需求：再添加一个城市的温度变化</p>
+<p>收集到北京当天温度变化情况，温度在1度到3度。怎么去添加另一个在同一坐标系当中的不同图形，其实很简单只需要再次plot即可，但是需要区分线条，如下显示<br>
+<img src="https://heshiyingx.github.io/post-images/1612530001960.png" alt="" loading="lazy"></p>
+<pre><code class="language-python"># 增加北京的温度数据
+y_beijing = [random.uniform(1, 3) for i in x]
+
+# 绘制折线图
+plt.plot(x, y_shanghai)
+# 使用多次plot可以画多个折线
+plt.plot(x, y_beijing, color='r', linestyle='--')
+</code></pre>
+<p>我们仔细观察，用到了两个新的地方，一个是对于不同的折线展示效果，一个是添加图例。</p>
+<h2 id="32-设置图形风格">3.2 设置图形风格</h2>
+<table>
+<thead>
+<tr>
+<th>颜色字符</th>
+<th>风格字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r 红色</td>
+<td>- 实线</td>
+</tr>
+<tr>
+<td>g 绿色</td>
+<td>-- 虚线</td>
+</tr>
+<tr>
+<td>b 蓝色</td>
+<td>-. 点划线</td>
+</tr>
+<tr>
+<td>w 白色</td>
+<td>: 点虚线</td>
+</tr>
+<tr>
+<td>c 青色</td>
+<td>'' 留空、空格</td>
+</tr>
+<tr>
+<td>m 洋红</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="33-显示图例">3.3 显示图例</h2>
+<p>注意：如果只在plt.plot()中设置label还不能最终显示出图例，还需要通过plt.legend()将图例显示出来。</p>
+<pre><code class="language-python"># 绘制折线图
+plt.plot(x, y_shanghai, label=&quot;上海&quot;)
+# 使用多次plot可以画多个折线
+plt.plot(x, y_beijing, color='r', linestyle='--', label=&quot;北京&quot;)
+
+# 显示图例
+plt.legend(loc=&quot;best&quot;)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Location String</th>
+<th>Location Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>'best'</td>
+<td>0</td>
+</tr>
+<tr>
+<td>'upper right'</td>
+<td>1</td>
+</tr>
+<tr>
+<td>'upper left'</td>
+<td>2</td>
+</tr>
+<tr>
+<td>'lower left'</td>
+<td>3</td>
+</tr>
+<tr>
+<td>'lower right'</td>
+<td>4</td>
+</tr>
+<tr>
+<td>'right'</td>
+<td>5</td>
+</tr>
+<tr>
+<td>'center left'</td>
+<td>6</td>
+</tr>
+<tr>
+<td>'center right'</td>
+<td>7</td>
+</tr>
+<tr>
+<td>'lower center'</td>
+<td>8</td>
+</tr>
+<tr>
+<td>'upper center'</td>
+<td>9</td>
+</tr>
+<tr>
+<td>'center'</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>完整代码</strong></p>
+<pre><code class="language-python"># 0.准备数据
+x = range(60)
+y_shanghai = [random.uniform(15, 18) for i in x]
+y_beijing = [random.uniform(1,3) for i in x]
+
+# 1.创建画布
+plt.figure(figsize=(20, 8), dpi=100)
+
+# 2.绘制图像
+plt.plot(x, y_shanghai, label=&quot;上海&quot;)
+plt.plot(x, y_beijing, color=&quot;r&quot;, linestyle=&quot;--&quot;, label=&quot;北京&quot;)
+
+# 2.1 添加x,y轴刻度
+# 构造x,y轴刻度标签
+x_ticks_label = [&quot;11点{}分&quot;.format(i) for i in x]
+y_ticks = range(40)
+
+# 刻度显示
+plt.xticks(x[::5], x_ticks_label[::5])
+plt.yticks(y_ticks[::5])
+
+# 2.2 添加网格显示
+plt.grid(True, linestyle=&quot;--&quot;, alpha=0.5)
+
+# 2.3 添加描述信息
+plt.xlabel(&quot;时间&quot;)
+plt.ylabel(&quot;温度&quot;)
+plt.title(&quot;中午11点--12点某城市温度变化图&quot;, fontsize=20)
+
+# 2.4 图像保存
+plt.savefig(&quot;./test.png&quot;)
+
+# 2.5 添加图例
+plt.legend(loc=0)
+
+# 3.图像显示
+plt.show()
+</code></pre>
+<h1 id="4-多个坐标系显示-pltsubplots面向对象的画图方法">4 多个坐标系显示— plt.subplots(面向对象的画图方法)</h1>
+<p>如果我们想要将上海和北京的天气图显示在同一个图的不同坐标系当中，效果如下：<br>
+<img src="https://heshiyingx.github.io/post-images/1612530885925.png" alt="" loading="lazy"><br>
+可以通过subplots函数实现(旧的版本中有subplot，使用起来不方便)，推荐subplots函数<br>
+**matplotlib.pyplot.subplots(nrows=1, ncols=1, <strong>fig_kw) 创建一个带有多个axes(坐标系/绘图区)的图</strong></p>
+<pre><code class="language-python">Parameters:    
+
+nrows, ncols : 设置有几行几列坐标系
+    int, optional, default: 1, Number of rows/columns of the subplot grid.
+
+Returns:    
+fig : 图对象
+axes : 返回相应数量的坐标系
+
+设置标题等方法不同：
+    set_xticks
+    set_yticks
+    set_xlabel
+    set_ylabel
+</code></pre>
+<p>关于axes子坐标系的更多方法：参考https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes</p>
+<p>注意：plt.函数名()相当于面向过程的画图方法，axes.set_方法名()相当于面向对象的画图方法。</p>
+<p><strong>完整代码</strong></p>
+<pre><code class="language-python"># 0.准备数据
+x = range(60)
+y_shanghai = [random.uniform(15, 18) for i in x]
+y_beijing = [random.uniform(1, 5) for i in x]
+
+# 1.创建画布
+# plt.figure(figsize=(20, 8), dpi=100)
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(20, 8), dpi=100)
+
+
+# 2.绘制图像
+# plt.plot(x, y_shanghai, label=&quot;上海&quot;)
+# plt.plot(x, y_beijing, color=&quot;r&quot;, linestyle=&quot;--&quot;, label=&quot;北京&quot;)
+axes[0].plot(x, y_shanghai, label=&quot;上海&quot;)
+axes[1].plot(x, y_beijing, color=&quot;r&quot;, linestyle=&quot;--&quot;, label=&quot;北京&quot;)
+
+# 2.1 添加x,y轴刻度
+# 构造x,y轴刻度标签
+x_ticks_label = [&quot;11点{}分&quot;.format(i) for i in x]
+y_ticks = range(40)
+
+# 刻度显示
+# plt.xticks(x[::5], x_ticks_label[::5])
+# plt.yticks(y_ticks[::5])
+axes[0].set_xticks(x[::5])
+axes[0].set_yticks(y_ticks[::5])
+axes[0].set_xticklabels(x_ticks_label[::5])
+axes[1].set_xticks(x[::5])
+axes[1].set_yticks(y_ticks[::5])
+axes[1].set_xticklabels(x_ticks_label[::5])
+
+# 2.2 添加网格显示
+# plt.grid(True, linestyle=&quot;--&quot;, alpha=0.5)
+axes[0].grid(True, linestyle=&quot;--&quot;, alpha=0.5)
+axes[1].grid(True, linestyle=&quot;--&quot;, alpha=0.5)
+
+# 2.3 添加描述信息
+# plt.xlabel(&quot;时间&quot;)
+# plt.ylabel(&quot;温度&quot;)
+# plt.title(&quot;中午11点--12点某城市温度变化图&quot;, fontsize=20)
+axes[0].set_xlabel(&quot;时间&quot;)
+axes[0].set_ylabel(&quot;温度&quot;)
+axes[0].set_title(&quot;中午11点--12点某城市温度变化图&quot;, fontsize=20)
+axes[1].set_xlabel(&quot;时间&quot;)
+axes[1].set_ylabel(&quot;温度&quot;)
+axes[1].set_title(&quot;中午11点--12点某城市温度变化图&quot;, fontsize=20)
+
+# # 2.4 图像保存
+plt.savefig(&quot;./test.png&quot;)
+
+# # 2.5 添加图例
+# plt.legend(loc=0)
+axes[0].legend(loc=0)
+axes[1].legend(loc=0)
+
+
+# 3.图像显示
 plt.show()
 </code></pre>
 
@@ -185,10 +455,20 @@ plt.show()
 <li><a href="#2%E6%8A%98%E7%BA%BF%E5%9B%BE">2.折线图</a>
 <ul>
 <li><a href="#21-%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%BB%98%E5%9B%BE%E6%A0%B7%E5%BC%8F">2.1 格式化绘图样式</a></li>
-<li><a href="#22%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89xy%E7%9A%84%E5%88%BB%E5%BA%A6">2.2添加自定义x,y的刻度</a></li>
+<li><a href="#22-%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89xy%E7%9A%84%E5%88%BB%E5%BA%A6">2.2 添加自定义x,y的刻度</a></li>
+<li><a href="#23-%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%A0%BC%E6%98%BE%E7%A4%BA">2.3 添加网格显示</a></li>
+<li><a href="#24-%E6%B7%BB%E5%8A%A0%E6%8F%8F%E8%BF%B0%E4%BF%A1%E6%81%AF">2.4 添加描述信息</a></li>
+<li><a href="#25-%E5%9B%BE%E5%83%8F%E4%BF%9D%E5%AD%98">2.5 图像保存</a></li>
 </ul>
 </li>
-<li><a href="#1%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E5%B9%B6%E7%94%BB%E6%8A%98%E7%BA%BF%E5%9B%BE">1.准备数据并画折线图</a></li>
+<li><a href="#3-%E5%9C%A8%E4%B8%80%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%AD%E7%BB%98%E5%88%B6%E5%A4%9A%E4%B8%AA%E5%9B%BE%E5%83%8F">3 在一个坐标系中绘制多个图像</a>
+<ul>
+<li><a href="#31-%E5%A4%9A%E6%AC%A1plot">3.1 多次plot</a></li>
+<li><a href="#32-%E8%AE%BE%E7%BD%AE%E5%9B%BE%E5%BD%A2%E9%A3%8E%E6%A0%BC">3.2 设置图形风格</a></li>
+<li><a href="#33-%E6%98%BE%E7%A4%BA%E5%9B%BE%E4%BE%8B">3.3 显示图例</a></li>
+</ul>
+</li>
+<li><a href="#4-%E5%A4%9A%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E6%98%BE%E7%A4%BA-pltsubplots%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%BB%E5%9B%BE%E6%96%B9%E6%B3%95">4 多个坐标系显示— plt.subplots(面向对象的画图方法)</a></li>
 </ul>
 
               </div>
