@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heshiyingx.github.io</id>
     <title>Gridea</title>
-    <updated>2021-02-05T04:15:57.392Z</updated>
+    <updated>2021-02-05T04:22:09.329Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heshiyingx.github.io"/>
     <link rel="self" href="https://heshiyingx.github.io/atom.xml"/>
@@ -105,7 +105,6 @@ pandas==1.2.1
 tables==3.6.1
 jupyter==1.0.0
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://heshiyingx.github.io/post-images/1612453352328.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
