@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heshiyingx.github.io</id>
     <title>烂笔头</title>
-    <updated>2021-02-11T12:44:16.025Z</updated>
+    <updated>2021-02-18T07:27:56.815Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heshiyingx.github.io"/>
     <link rel="self" href="https://heshiyingx.github.io/atom.xml"/>
@@ -554,6 +554,109 @@ axes[1].legend(loc=0)
 
 # 3.图像显示
 plt.show()
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[1.MySQL5.7配置文件]]></title>
+        <id>https://heshiyingx.github.io/post/1mysql57-pei-zhi-wen-jian/</id>
+        <link href="https://heshiyingx.github.io/post/1mysql57-pei-zhi-wen-jian/">
+        </link>
+        <updated>2016-02-06T06:50:44.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-ini">[mysqld]
+initialize-insecure # 关闭安全策略
+# 服务端口号 默认3306
+port = 3306 
+user #用户
+basedir # 指定mysql的安装目录
+#mysql数据文件所在位置
+datadir = /data/mysql1/data
+#设置socke文件所在目录
+socket  = /tmp/mysql.sock
+# 监听的IP
+bind-address = *
+#指定默认时区，如果没有指定则和系统默认时区一致
+default-time-zone = '+8:00'
+# 默认5000，指定Mysqld运行过程中可以打开的文件数，避免出现” Too many open files”报错
+ open-files-limit = 65535
+# 指定Mysqld进程对应的程序ID文件，默认是在数据文件目录里
+pid-file=/usr/local/mysql/data/M00006.pid
+# 关闭自动更新一行数据中timestamp的数据
+explicit_defaults_for_timestamp = on
+# 打开安全更新，避免没有条件的update和delete
+sql_safe_updates=1
+
+########## mysqlx插件 ###############
+mysqlx_port=33070
+mysqlx_socket=/tmp/mysqlx33070.sock
+
+
+#事务隔离级别，默认为可重复读，mysql默认可重复读级别（此级别下可能参数很多间隙锁，影响性能）
+transaction_isolation = READ-COMMITTED
+#数据库默认字符集,主流字符集支持一些特殊表情符号（特殊表情符占用4个字节）
+character-set-server = utf8mb4
+#数据库字符集对应一些排序等规则，注意要和character-set-server对应
+collation-server = utf8mb4_general_ci
+#设置client连接mysql时的字符集,防止乱码
+init_connect='SET NAMES utf8mb4'
+# mysql 5.7新增特性，磁盘临时表默认引擎，默认InnoDB
+internal_tmp_disk_storage_engine = InnoDB
+default-storage-engine = InnoDB
+#是否对sql语句大小写敏感，1表示不敏感
+lower_case_table_names = 1
+
+############日志设置#########
+#数据库错误日志文件
+log_error =/data/mysql1/log/web01_error.log
+#一般日志
+general_log_file =/data/mysql1/log/web01_general.log
+#是否开启一般日志
+general_log = 0
+# 记录没有使用索引的查询
+log_queries_not_using_indexes =1
+#慢查询sql日志设置
+slow_query_log = 1
+slow_query_log_file = /data/mysql1/log/web01_slow.log
+# 关闭查询缓存
+query-cache-type = 0 
+binlog_format=row #记录日志的格式
+binlog_row_image=full #会记录数据更改前后的结果
+
+############## 组提交 ###############
+# 在并发不高的时候不开，否则，可能造成等待
+binlog_group_commit_sync_delay=20 #mysql最迟多久提交一次
+binlog_group_commit_sync_no_delay_count=1000 #mysql最多提交事务的个数
+
+#############主从(从)#################
+skip_slave_start=1 #该选项能够阻止备库在崩溃后自动启动复制，崩溃后启动复制，数据可能不一致
+log_slave_updates=1    #允许备库将其重放的事件也记录到自身的二进制日志中。
+read_only = 1   #该选项会阻止任何没有特权权限的线程修改数据。
+
+
+# 指定索引缓冲区的大小，它决定索引处理的速度，尤其是索引读的速度。
+#一般不适用myslam引擎范围是8~32M，足够了，
+#如果使用，通过检查状态值Key_read_requests和Key_reads，可以知道key_buffer_size设置是否合理。比例key_reads /key_read_requests应该尽可能的低，至少是1:100，1:1000更好（上述状态值可以使用SHOW STATUS LIKE ‘key_read%'获得）
+key_buffer_size = 32M
+
+# 一般设置成物理内存的50~70%
+# 数据缓存--InnoDB数据页面
+# 索引缓存--索引数据
+# 缓冲数据--脏页（在内存中修改尚未刷新(写入)到磁盘的数据）
+# 内部结构--如自适应哈希索引，行锁等。通过命中概率，可以了解，ibp是否足够
+innodb_buffer_pool_size = 2867M
+
+
+innodb_buffer_pool_instances = 4
+innodb_buffer_pool_load_at_startup = 1
+innodb_buffer_pool_dump_at_shutdown = 1
+# 根据您的服务器IOPS能力适当调整
+# 一般配普通SSD盘的话，可以调整到 10000 - 20000
+# 配置高端PCIe SSD卡的话，则可以调整的更高，比如 50000 - 80000
+innodb_io_capacity = 4000
+# 并发线程数，0为不限制
+innodb_thread_concurrency = 0
+# 慢查询的时间超过50ms的即是慢查询，开发环境建议是0.01
+long_query_time = 0.05
 </code></pre>
 ]]></content>
     </entry>
