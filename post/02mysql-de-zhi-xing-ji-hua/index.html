@@ -1,0 +1,314 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>02.mysql的执行计划 | 烂笔头</title>
+
+<link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1613828129111">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://heshiyingx.github.io/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            烂笔头
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1613828129111" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    02.mysql的执行计划
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2016-02-18 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="01执行计划的组成部分">01.执行计划的组成部分</h1>
+<p>执行计划有id、select_type、table 、partitions、type、possible_keys、key 、key_len、ref 、rows、filtered、Extra组成。</p>
+<h2 id="id">id</h2>
+<p>执行计划的id标志</p>
+<ul>
+<li>单纯的join (没有子查询)id都是1且从上到下</li>
+<li>Subquery,scala subquery都会使ID递增</li>
+</ul>
+<h2 id="select_type">select_type</h2>
+<p>select类型</p>
+<ul>
+<li>SIMPLE:简单SELECT(不使用UNION或􏰂查询等)</li>
+<li>primary:最外层的select,使用了union或者subquery的query并且不能被优化合并<pre><code>1.子查询中出现了limit就不能被优化合并。
+</code></pre>
+</li>
+<li>union:UNION中的第二个或后面的SELECT语句(使用union结合的select除了第一个之外的select select_type用union)
+<ul>
+<li>union result是union去掉重复值的零时表</li>
+<li>union all 不出现union result因为不去重</li>
+</ul>
+</li>
+<li>subquery:子查询中的第一个SELECT</li>
+<li>dependent subquery:􏰂查询中的第一个SELECT，依赖于外面的查询（UNION中的第二个或后面的SELECT语句，依赖于外面的查询）</li>
+<li>derved:派生表的SELECT(FROM􏰂句的􏰂查询)
+<ul>
+<li>From后面表的位置上的subquery</li>
+<li>Derived是生成在内存或者零时表空间中的</li>
+<li>如果derived当做驱动表的时候要点是要减少数据量为目的</li>
+<li>当作被驱动表的时候产生auto_key索引也是要以数据量为目的</li>
+</ul>
+</li>
+<li>materialized:物化子查询
+<ul>
+<li>产生中间临时表(实体)</li>
+<li>临时表自动创建索引并和其他表进行关联，提高性能</li>
+<li>和子查询的区别是，优化器将可以进行 MATERIALIZED 的语句自动改写成 join ，并自动创建索引</li>
+</ul>
+</li>
+<li>UNCACHEABLE SUBQUERY：不会被缓存的并且对于外部查询的每行都要重新计算的子查询</li>
+<li>UNCACHEABLE UNION：属于不能被缓存的 UNION中的第二个或后面的SELECT语句</li>
+</ul>
+<h2 id="table">table</h2>
+<p>输出记录的表</p>
+<ul>
+<li>通常是用户操作的用户表</li>
+<li>&lt;unionM, N&gt; UNION得到的结果表</li>
+<li>派生表，由id=N的语句产生</li>
+<li>由子查询物化产生的表，由id=N的语句产生</li>
+</ul>
+<h2 id="partitions">partitions</h2>
+<p>符合的分区</p>
+<h2 id="type">type</h2>
+<p>join的类型<br>
+摘自姜老师的PDF，按照图上箭头的顺序来看，成本(cost)是从小到大<br>
+<img src="https://heshiyingx.github.io/post-images/1613810532212.png" alt="" loading="lazy"></p>
+<h2 id="possible_keys">possible_keys</h2>
+<p>优化器可能使用到的索引</p>
+<h2 id="key">key</h2>
+<p>优化器实际使用的索引</p>
+<h2 id="key_len">key_len</h2>
+<p>使用索引的字节长度</p>
+<h2 id="ref">ref</h2>
+<p>进行比较的索引列。多用于被驱动表，显示驱动的字段。</p>
+<h2 id="rows">rows</h2>
+<p>优化器预估的扫描行</p>
+<h2 id="filtered">filtered</h2>
+<p>根据条件过滤得到的百分比</p>
+<h2 id="extra">Extra</h2>
+<p>额外的显示选项<br>
+<strong>常见的extra</strong></p>
+<table>
+<thead>
+<tr>
+<th>常见值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Using filesort</td>
+<td>需要使用额外的排序得到的结果</td>
+</tr>
+<tr>
+<td>Using index</td>
+<td>优化器只需要使用索引就能得到结果</td>
+</tr>
+<tr>
+<td>Using index condition</td>
+<td>优化器使用index condition pushdown优化</td>
+</tr>
+<tr>
+<td>Using index for group by</td>
+<td>优化器只需要使用索引就能处理group by 或distinct语句</td>
+</tr>
+<tr>
+<td>Using join buffer</td>
+<td>优化器需要使用join buffer,join_buffer_size</td>
+</tr>
+<tr>
+<td>Using MRR</td>
+<td>优化器使用MRR优化</td>
+</tr>
+<tr>
+<td>Using temporary</td>
+<td>优化器需要使用零时表</td>
+</tr>
+<tr>
+<td>Using where</td>
+<td>优化器使用where过滤</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>using filesort:可以使用复合索引将filesort优化。提高性能</li>
+<li>using index:使用覆盖索引</li>
+<li>using where:使用where过滤条件</li>
+</ul>
+<h1 id="02执行计划示例">02.执行计划示例</h1>
+<pre><code class="language-sql">select * from employess as e ingore index(pri) straight_join t_group t on t.emp_no=e.emp_no;
+</code></pre>
+<p>执行计划：<br>
+<img src="https://heshiyingx.github.io/post-images/1613652500897.png" alt="" loading="lazy"></p>
+<h2 id="性能提升神器straight_join">【性能提升神器】STRAIGHT_JOIN</h2>
+<pre><code>STRAIGHT_JOIN is similar to JOIN, except that the left table is always read before the right table. 
+This can be used for those (few) cases for which the join optimizer puts the tables in the wrong order.
+</code></pre>
+<blockquote>
+<blockquote>
+<p>意思就是说STRAIGHT_JOIN功能同join类似，但能让左边的表来驱动右边的表，能改表优化器对于联表查询的执行顺序。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>优化原理：在MySQL执行时会将驱动表的内容放到buffer_size中（内存）（mysql设置的参数为：join_buffer_size），所以性能提升。如果将数据量大的表当做驱动表而buffer_size存不下。那么就会使用磁盘存储，就到导致物理io，从而影响性能。同理，如果join_buffer_size足够大，任意表当做驱动表对性能无影响。</p>
+</blockquote>
+</blockquote>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://heshiyingx.github.io/post/1mysql57-pei-zhi-wen-jian/" class="post-title gt-a-link">
+                    01.MySQL5.7配置文件
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '',
+		appKey: '',
+		avatar: '',
+		pageSize: 5,
+		recordIp: false,
+		placeholder: 'Just Go Go',
+		visitor: false,
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://heshiyingx.github.io/" target="_blank">John He</a>
+    </div>
+
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

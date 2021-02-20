@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>Hello Gridea | 烂笔头</title>
+<title>rocketmq1 | 烂笔头</title>
 
 <link rel="shortcut icon" href="https://heshiyingx.github.io/favicon.ico?v=1613828129111">
 
@@ -89,45 +89,91 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Hello Gridea
+                    rocketmq1
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2016-02-01 ·
+                        · 2018-05-09 ·
                     </time>
-                    
-                        <a href="https://heshiyingx.github.io/tag/F-J6re4NW/" class="post-tags">
-                            # Gridea
-                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                    <h1 id="专业术语">专业术语</h1>
+<ul>
+<li>
+<p>Producer<br>
+消息生产者，负责产生消息，一般由业务系统负责产生消息。</p>
+</li>
+<li>
+<p>Consumer<br>
+消息消费者，负责消费消息，一般是后台系统负责异步消费。</p>
+</li>
+<li>
+<p>PushConsumer<br>
+Consumer 的一种，应用通常向 Consumer 对象注册一个 Listener 接口，一旦收到消息，Consumer对象立刻回调 Listener 接口方法。</p>
+</li>
+<li>
+<p>Pull Consumer<br>
+Consumer 的一种，应用通常主劢调用 Consumer 的拉消息方法从 Broker 拉消息，主动权由应用控制。</p>
+</li>
+<li>
+<p>Producer Group<br>
+一类 Producer 的集合名称，这类Producer通常发送一类消息，且发送逻辑一致。</p>
+</li>
+<li>
+<p>Consumer Group<br>
+一类 Consumer 的集合名称，返类 Consumer 通常消费一类消息，且消费逻辑一致。</p>
+</li>
+<li>
+<p>Broker<br>
+消息中转角色，负责存储消息，转发消息，一般也称为 Server。在 JMS 规范中称为 Provider。</p>
+</li>
+<li>
+<p>Message Queue<br>
+在 RocketMQ 中，所有消息队列都是持久化，长度无限的数据结构，所谓长度无限是指队列中的每个存储<br>
+单元都是定长，访问其中的存储单元使用 Offset 来访问，offset 为 java long 类型，64 位，理论上在 100 年内不会溢出，所以认为是长度无限，另外队列中只保存最近几天的数据，之前的数据会按照过期时间来删除。<br>
+也可以认为 Message Queue 是一个长度无限的数组，offset 就是下标。</p>
+</li>
+<li>
+<p>广播消费<br>
+一条消息被多个Consumer消费，即使这些Consumer属于同一个Consumer Group，消息也会被 Consumer Group 中的每个Consumer都消费一次，广播消费中的Consumer Group概念可以认为在消息划分方面无意义。<br>
+在 CORBA Notification 规范中，消费方式都属于广播消费。<br>
+在 JMS 规范中，相当于 JMS publish/subscribe model</p>
+</li>
+<li>
+<p>集群消费<br>
+一个 Consumer Group 中的 Consumer 实例平均分摊消费消息。例如某个 Topic 有 9 条消息，其中一个 Consumer Group 有 3 个实例(可能是 3个迕程，或者3台机器)，那么每个实例只消费其中的 3 条消息。 在 CORBA Notification 规范中，无此消费方式。<br>
+在 JMS 规范中，JMS point-to-point model 不与之类似，但是 RocketMQ 的集群消费功能大概等于 PTP 模型。 因为RocketMQ 单个 Consumer Group 内的消费者类似于PTP，但是一个 Topic/Queue 可以被多个Consumer Group消费。</p>
+</li>
+<li>
+<p>顺序消息<br>
+消费消息的顺序要同发送消息的顺序一致，在RocketMQ 中，主要指的是局部顺序，即一类消息为满足顺 序性，必须 Producer 单线程顺序发送，且发送到同一个队列，返样 Consumer 就可以挄照 Producer发送的顺序去消费消息。</p>
+</li>
+<li>
+<p>普通顺序消息<br>
+顺序消息的一种，正常情况下可以保证完全的顺序消息，但是一旦发生通信异常，Broker重启，由于队列 总数发生发化，哈希取模后定位的队列会发化，产生短暂的消息顺序不一致。 如果业务能容忍在集群异常情冴(如某个 Broker 宕机戒者重启)下，消息短暂的乱序，使用普通顺序方 式比较合适。</p>
+</li>
+<li>
+<p>严格顺序消息<br>
+顺序消息的一种，无论正常异常情冴都能保证顺序，但是牺牲了分布式 Failover特性，即Broker集群中只要有一台机器不可用，则整个集群都不可用，服务可用性大大降低。 如果服务器部署为同步双写模式，此缺陷可通过备机自动切换为主避免，不过仍然会存在几分钟的服务不可用。(依赖同步双写，主备自动切换，自动切换功能目前还未实现)<br>
+目前已知的应用只有数据库 binlog 同步强依赖严格顺序消息，其他应用绝大部分都可以容忍短暂乱序，推<br>
+荐使用普通的顺序消息。</p>
+</li>
+</ul>
+<h1 id="1rocketmq环境搭建">1.RocketMQ环境搭建</h1>
+<h1 id="2rocketmq控制台部署与使用">2.RocketMQ控制台部署与使用</h1>
 
                 </div>
             </article>
         </div>
 
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://heshiyingx.github.io/post/yuan-lai-8-zhang-tu-jiu-ke-yi-gao-dong-ling-kao-bei-liao/" class="post-title gt-a-link">
+                    01.原来 8 张图，就可以搞懂「零拷贝」了
+                </a>
+            </div>
         
 
         
